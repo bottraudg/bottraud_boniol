@@ -27,4 +27,13 @@ public boolean ajouterJetonDansColonne(Jeton, int){ // prend en parametre un jet
     }
 return false; // colonne remplie 
 }
+public boolean grilleRemplie()
+       for (int l=0; l<6; l++){ //parcours le tableau grille
+        for (int c=0;c<7; c++){
+            if (grille[l][c] != null){ // si toutes les cases sont remplies
+                return true; // grille remplie
+            
+        }
+        }
+}
 }
