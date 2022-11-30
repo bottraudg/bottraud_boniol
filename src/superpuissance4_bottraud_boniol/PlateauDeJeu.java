@@ -18,7 +18,7 @@ public class PlateauDeJeu {
      }   
    }
  }    
-public boolean ajouterJetonDansColonne(Jeton unJeton, int c){ // prend en parametre un jeton et une colonne 
+public boolean ajouterJetonDansColonne(Jeton unJeton, int c ){ // prend en parametre un jeton et une colonne 
     for (int l=0; l<6; l++){ // parcours les lignes 
         if (grille[l][c].jetonCourant == null){ // on affecte le jeton dès qu'une case sur la colonne est vide 
         grille[l][c].affecterJeton(unJeton);
@@ -47,9 +47,9 @@ public void viderGrille(Joueur, Joueur){ //initialise les données a 0 pour tout
         }
 }
 public void GrilleSurConsole() { // afficher le grille dans la console 
-    for(int l=5; l=0; l>=0); l--){ // bloucle décrémentée car l'affichage conventionnel et celui dans les tableaux sont inversé 
+    for (int l=5; l=0; l>=0); l--){ // bloucle décrémentée car l'affichage conventionnel et celui dans les tableaux sont inversé 
     for (int c=0; c<7; c++){
-        if (grille[l][c].TrouNoir != false{
+        if (grille[l][c].TrouNoir != false){
             System.out.print("T"); // T sur la cellule pour signifier sa presence
         }
         else if(grille [l][c].desintegrateur !=false){
@@ -71,5 +71,18 @@ public void GrilleSurConsole() { // afficher le grille dans la console
     }
     System.out.println();// affichage global du tableau    
 }
+public boolean presenceJeton(int x, int y){ // si la cellule est occupée par un jeton renvoie true, sinon renvoie false 
+    
+    if (grille[l][c].jetonCourant != null){
+        System.out.println("jeton présent");
+        return true;
+    }
+    return false;
+}
+public String lireCouleurDuJeton (int l,int c){// retourne la couleur du jeton 
+    return grille[l][c].jetonCourant.Couleur;
+}
 
+
+}
 }
