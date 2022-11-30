@@ -112,12 +112,20 @@ public class CelluledeGrille {
             return false;
         }
     }
+    
+    public boolean presenceJeton(){
+        if (JetonGrille==true){
+            return true;
+        } else{
+            return false;
+        }
+    }
 
     /**
      * Lit la couleur d'un  jeton
      * @return la couleur du jeton
      */
-    public String lireCouleurJeton() {
+    public String lireCouleurDuJeton() {
         if (JetonGrille == null) {
             return "cellule vide";
         } else {
@@ -155,5 +163,10 @@ public class CelluledeGrille {
             System.out.println("pas de trou noir");
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "CelluledeGrille{" + "JetonGrille=" + JetonGrille + ", TrouNoir=" + TrouNoir + ", d\u00e9sintegrateur=" + désintegrateur + '}';
     }
 }
