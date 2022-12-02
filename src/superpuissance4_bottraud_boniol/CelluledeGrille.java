@@ -16,10 +16,11 @@ public class CelluledeGrille {
 
     /**
      * Affecte un jeton à une celulle
+     *
      * @param JetonCellule
      * @return true si le jeton à bien été affecté sinon return false
      */
-    public boolean affecterJeton(Jeton JetonCellule) { 
+    public boolean affecterJeton(Jeton JetonCellule) {
         if (JetonGrille == null) {
             JetonGrille = JetonCellule;
             System.out.println("jeton affecté");
@@ -32,9 +33,10 @@ public class CelluledeGrille {
 
     /**
      * Récupère le jeton d'une cellule
+     *
      * @return le jeton récupéré
      */
-    public Jeton récupererJeton() { 
+    public Jeton récupererJeton() {
         Jeton JetonRécupéré = JetonGrille;
         JetonGrille = null;
         return JetonRécupéré;
@@ -42,9 +44,10 @@ public class CelluledeGrille {
 
     /**
      * Supprime le jeton d'une cellule
-     * @return true si le jeton à bien été supprimé et return false s'il n'y a pas de jeton
+     * @return true si le jeton à bien été supprimé et return false s'il n'y a
+     * pas de jeton
      */
-    public boolean supprimerJeton() { 
+    public boolean supprimerJeton() {
         if (JetonGrille == null) {
             System.out.println("case vide");
             return false;
@@ -57,7 +60,9 @@ public class CelluledeGrille {
 
     /**
      * Place un trou noir sur une cellule
-     * @return true si le trou noir à bien été placé et sinon return false s'il y a déjà un trou noir
+     *
+     * @return true si le trou noir à bien été placé et sinon return false s'il
+     * y a déjà un trou noir
      */
     public boolean placerTrouNoir() {
         if (TrouNoir == false) {
@@ -71,8 +76,25 @@ public class CelluledeGrille {
     }
 
     /**
-     * Place un désintégrateur sur une cellule 
-     * @return true si le désintegrateur à bien été placé et sinon return false s'il y a déjà un désintegrateur
+     * Supprime le trou noir d'une cellule
+     * @return true si le trou noir est supprimé sinon false si la case est vide
+     */
+    public boolean supprimerTrouNoir() {
+        if (TrouNoir == false) {
+            System.out.println("case vide");
+            return false;
+        } else {
+            TrouNoir = true;
+            System.out.println("Trou noir supprimé");
+            return true;
+        }
+    }
+
+    /**
+     * Place un désintégrateur sur une cellule
+     *
+     * @return true si le désintegrateur à bien été placé et sinon return false
+     * s'il y a déjà un désintegrateur
      */
     public boolean placerDésintegrateur() {
         if (désintegrateur == false) {
@@ -87,6 +109,7 @@ public class CelluledeGrille {
 
     /**
      * Vérifie la présence d'un trou noir
+     *
      * @return true si un trou noir est présent sinon return false
      */
     public boolean présenceTrouNoir() {
@@ -101,6 +124,7 @@ public class CelluledeGrille {
 
     /**
      * Vérifie la présence d'un désintegrateur
+     *
      * @return true si un désintegrateur est présent sinon return false
      */
     public boolean présenceDésintegrateur() {
@@ -112,17 +136,23 @@ public class CelluledeGrille {
             return false;
         }
     }
-    
-    public boolean presenceJeton(){
-        if (JetonGrille==true){
-            return true;
-        } else{
+
+    /**
+     * Verifie la présence d'un jeton
+     *
+     * @return true s'il y a un jeton sinon false
+     */
+    public boolean presenceJeton() {
+        if (JetonGrille == null) {
             return false;
+        } else {
+            return true;
         }
     }
 
     /**
-     * Lit la couleur d'un  jeton
+     * Lit la couleur d'un jeton
+     *
      * @return la couleur du jeton
      */
     public String lireCouleurDuJeton() {
@@ -135,6 +165,7 @@ public class CelluledeGrille {
 
     /**
      * Récupère le désintegrateur
+     *
      * @return true si le
      */
     public boolean recupererDésintégrateur() {
@@ -149,17 +180,17 @@ public class CelluledeGrille {
     }
 
     /**
-     * Utilise un trou noir  
-    * @return
+     * Utilise un trou noir
+     *
+     * @return
      */
-    public boolean utiliserTrouNoir(){
-        if (TrouNoir==true){
-            JetonGrille=null;
-            TrouNoir=false;
+    public boolean utiliserTrouNoir() {
+        if (TrouNoir == true) {
+            JetonGrille = null;
+            TrouNoir = false;
             System.out.println("Trou noir utilisé");
             return true;
-        }
-        else{
+        } else {
             System.out.println("pas de trou noir");
             return false;
         }
