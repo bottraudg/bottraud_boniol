@@ -46,35 +46,38 @@ public void viderGrille(Joueur, Joueur){ //initialise les données a 0 pour tout
                     
         }
 }
-public void GrilleSurConsole() { // afficher le grille dans la console 
-    for (int l=5; l=0; l>=0); l--){ // bloucle décrémentée car l'affichage conventionnel et celui dans les tableaux sont inversé 
-    for (int c=0; c<7; c++){
-        if (grille[l][c].TrouNoir != false){
-            System.out.print("T"); // T sur la cellule pour signifier sa presence
+public void  afficherGrilleSurConsole() { // affiche la grille dans la console
+
+    for (int l=5; l>=0; l--){ // boucle décrémentée car l'affichage conventionnel et celui pris par les tableaux est inversé
+        for (int c=0; c<7; c++){
+            if (grille[l][c].trouNoir != false){
+                System.out.print("T"); // T sur la cellule pour signifier sa présence
+            }
+            else if (grille[l][c].desintegrateur != false){
+                System.out.print("D");
+            }
+            else if (grille[l][c].jetonCourant == null){
+                System.out.print("N");
+            }
+            else if ((grille[l][c].jetonCourant.Couleur)!= "Rouge"){
+                    System.out.print("J");
+                 }
+            else{
+                    System.out.print("R");
+                }
+                  
         }
-        else if(grille [l][c].desintegrateur !=false){
-            System.out.print("D");
-        }
-        else if (grille[l][c].jetonCourant == null){
-            System.out.print("N");
-        }
-        else if ((grille[l][c].jetonCourant.Couleur)!= "Rouge"){
-            System.out.print("J");
-        }
-        else{ System.out.print("R");
-        }
+        System.out.println(" " + (l+1)); // affichage des numéros de lignes (l+1) car tableau commence à 0
     }
-    System.out.println(""+ (l+1)); // affichage des numéros de lignes (l+1)car le tableau est initié a 0
-}
     for (int c=0; c<7; c++){
-        System.out.print((c+1)); //affichage des colonnes (c+1) car tableau commence à 0
+        System.out.print((c+1)); // affichage des colonnes (c+1) car tableau commence à 0
     }
-    System.out.println();// affichage global du tableau    
+    System.out.println(); // affichage global du tableau
 }
 public boolean presenceJeton(int x, int y){ // si la cellule est occupée par un jeton renvoie true, sinon renvoie false 
     
-    if (grille[l][c].jetonCourant != null){
-        System.out.println("jeton présent");
+     if (grille[l][c].jetonCourant != null){
+        System.out.println("Cellule occupée par jeton");
         return true;
     }
     return false;
@@ -83,6 +86,107 @@ public String lireCouleurDuJeton (int l,int c){// retourne la couleur du jeton
     return grille[l][c].jetonCourant.Couleur;
 }
 
+public boolean etreGagnantePourCouleur(Joueur unNom){ // détecte les victoires, si 4 jetons sont alignées sur AU MOINS UNE des drections de l'espace alors renvoie true 
+if (ligneGagnantePourCouleur(unNom.CouleurDuJoueur()) == true || 
+        colonneGagnantePourCouleur(unNom.CouleurDuJoueur()) == true ||
+        diagonaleMontanteGagnantePourCouleur(unNom.CouleurDuJoeur()) == true ||
+        diagonaleDesencanteGagnantePourCouleur(unNom.CouleurDuJoueur()) == true){
+    //System.out.println("gagné");
+    return true;
+}
+else { //System.out.println("pas encore gagné");
+}
+return false;
+}
 
+public boolean ligneGagnantePourCouleur(String Couleur){ // vérifie l'alignement de 4 jetons sur une ligne
+    for (int l=0; l<6; l++){ // spécification de l'espace de définition où on cherche un premier jeton pour pouvoir chercher les suivants
+        for (int c=0; c<4 ;c++){ // évite les problèmes de dimension de tableau
+            if (grille[l][c].jetonCourant != null && grille[l][c].jetonCourant.Couleur == Couleur){ // 1ère condition : on vérifie que la case sélectionnée n'est pas vide ET que la couleur sélectionnée est la bonne
+                int i = 1; // création d'un compteur qui donne le résultat de l'alignement donc initialisé à 1 car jeton aligné avec lui-même
+                while (i<4 && grille[l][c+i].jetonCourant != null){ // mise en place d'une boucle qui vérifie les jetons sur la ligne
+                    if (grille[l][c].jetonCourant.Couleur != grille[l][c+i].jetonCourant.Couleur ){
+                        break; 
+                    }
+                    i++;
+                }
+                if (i==4){ // si le jeton arrive à 4 tour de boucle sans y sortir alors il y a alignement
+                    return true;
+                }
+            }
+        }
+    }   
+    return false;
+}
+
+public boolean colonneGagnantePourCouleur(String Couleur){ // même principe que ConditionLigne
+    for (int l=0; l<3; l++){
+        for (int c=0; c<7 ;c++){
+            if (grille[l][c].jetonCourant != null && grille[l][c].jetonCourant.Couleur == Couleur){
+                int i = 1;
+                while (i<4 && grille[l+i][c].jetonCourant != null){
+                    if (grille[l][c].jetonCourant.Couleur != grille[l+i][c].jetonCourant.Couleur ){
+                        break; 
+                    }
+                    i++;
+                }
+                if (i==4){
+                    return true;
+                }
+            }
+        }
+    }   
+    return false;
+}
+public boolean diagonaleMontanteGagnantePourCouleur(String Couleur){
+    for (int l=0; l<3; l++){
+        for (int c=0; c<4 ;c++){
+            if (grille[l][c].jetonCourant != null && grille[l][c].jetonCourant.Couleur == Couleur){
+                int i = 1;
+                while (i<4 && grille[l+i][c+i].jetonCourant != null){
+                    if (grille[l][c].jetonCourant.Couleur != grille[l+i][c+i].jetonCourant.Couleur ){
+                        break; 
+                    }
+                    i++;
+                }
+                if (i==4){
+                    return true;
+                }
+            }
+        }
+    }   
+    return false;
+}
+
+public boolean diagonaleDesencanteGagnantePourCouleur(String Couleur){
+    for (int l=3; l<6; l++){
+        for (int c=0; c<4 ;c++){
+            if (grille[l][c].jetonCourant != null && grille[l][c].jetonCourant.Couleur == Couleur){
+                int i = 1;
+                while (i<4 && grille[l-i][c+i].jetonCourant != null){
+                    if (grille[l][c].jetonCourant.Couleur != grille[l-i][c+i].jetonCourant.Couleur ){
+                        break; 
+                    }
+                    i++;
+                }
+                if (i==4){
+                    return true;
+                }
+            }
+        }
+    }   
+    return false;
+}
+public void  tasserColonne(int l, int c){
+    // fais descendre de 1 ligne la colonne lorsque celle ci est impacté par l'activation d'un desintegrateur ou trou noir
+ 
+    for (int i=l; i<6; i++){
+        if (i==5){
+            grille[i][c].jetonCourant = null; // si on est sur la plus haute ligne du tableau, cela ne décale rien. On initialise juste la cellule
+        }
+        else{
+            grille[i][c].jetonCourant = grille[i+1][c].jetonCourant; // sinon on affecte à chaque ligne de la colonne fixée la valeur du jeton au-dessus de lui
+        }
+    }
 }
 }
