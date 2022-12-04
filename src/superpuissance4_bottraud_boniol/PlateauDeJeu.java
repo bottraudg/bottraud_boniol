@@ -9,9 +9,9 @@ package superpuissance4_bottraud_boniol;
  * @author guilenebottraud
  */
 public class PlateauDeJeu {
-    CelluleDeGrille grille [][] = new CelluleDeGrille [6][7]; // création d'un tableau à deux dimensions avec 6 lignes et 7 colonnes rempli d'objet Cellule 
+    CelluleDeGrille[][] grille = new CelluleDeGrille[6][7]; // création d'un tableau à deux dimensions avec 6 lignes et 7 colonnes rempli d'objet Cellule 
     
-    public Grille(){ // constructeur qui à chaque case du tableau crée une référence objet de classe Cellule 
+    public PlateauDeJeu(){ // constructeur qui à chaque case du tableau crée une référence objet de classe Cellule 
      for (int l=0; l<6; l++){
          for (int c=0; c<7; c++){
              grille[l][c] = new CelluleDeGrille();
@@ -46,7 +46,7 @@ public void viderGrille(Joueur, Joueur){ //initialise les données a 0 pour tout
                     
         }
 }
-public void  afficherGrilleSurConsole() { // affiche la grille dans la console
+public void afficherGrilleSurConsole() { // affiche la grille dans la console
 
     for (int l=5; l>=0; l--){ // boucle décrémentée car l'affichage conventionnel et celui pris par les tableaux est inversé
         for (int c=0; c<7; c++){
@@ -74,9 +74,9 @@ public void  afficherGrilleSurConsole() { // affiche la grille dans la console
     }
     System.out.println(); // affichage global du tableau
 }
-public boolean presenceJeton(int x, int y){ // si la cellule est occupée par un jeton renvoie true, sinon renvoie false 
+public boolean presenceJeton(int l, int c){ // si la cellule est occupée par un jeton renvoie true, sinon renvoie false 
     
-     if (grille[l][c].jetonCourant != null){
+     if (grille[l][c].jetonGrille != null){
         System.out.println("Cellule occupée par jeton");
         return true;
     }
@@ -86,18 +86,17 @@ public String lireCouleurDuJeton (int l,int c){// retourne la couleur du jeton
     return grille[l][c].jetonCourant.Couleur;
 }
 
-public boolean etreGagnantePourCouleur(Joueur unNom){ // détecte les victoires, si 4 jetons sont alignées sur AU MOINS UNE des drections de l'espace alors renvoie true 
-if (ligneGagnantePourCouleur(unNom.CouleurDuJoueur()) == true || 
-        colonneGagnantePourCouleur(unNom.CouleurDuJoueur()) == true ||
-        diagonaleMontanteGagnantePourCouleur(unNom.CouleurDuJoeur()) == true ||
-        diagonaleDesencanteGagnantePourCouleur(unNom.CouleurDuJoueur()) == true){
-    //System.out.println("gagné");
-    return true;
-}
-else { //System.out.println("pas encore gagné");
-}
-return false;
-}
+public boolean etreGagnantePourJoueur(joueur unNom){
+    // détecte les victoires.si 4 jetons sont alignées sur AU MOINS UNE des drections de l'espace alors renvoie true 
+    if (ligneGagnantePourCouleur(unNom.CouleurDujoueur()) == true || colonneGagnantePourCouleur(unNom.CouleurDujoueur()) == true || diagonaleMontanteGagnantePourCouleur(unNom.CouleurDujoueur()) == true || diagonaleDesencanteGagnantePourCouleur(unNom.CouleurDujoueur()) == true){
+        //System.out.println("gagné");
+        return true;
+    }
+    else {
+        //System.out.println("pas encore gagné");
+    }
+    return false;
+  }
 
 public boolean ligneGagnantePourCouleur(String Couleur){ // vérifie l'alignement de 4 jetons sur une ligne
     for (int l=0; l<6; l++){ // spécification de l'espace de définition où on cherche un premier jeton pour pouvoir chercher les suivants
@@ -189,4 +188,71 @@ public void  tasserColonne(int l, int c){
         }
     }
 }
+public boolean  dernièreLigneLibre(int c){
+    //Renvoie true si la colonne est remplie, false sinon
+ 
+    for (int l=0; l<6; l++){
+        if (grille[l][c].jetonCourant==null){ // si cellule vide alors colonne non remplie
+            return false ;
+        }
+    }
+    return true ; // colonne remplie
+}
+public boolean  placerTrouNoir(int l, int c){
+   // Si il y a déjà un trou noir, renvoie false, true sinon
+ 
+    if (grille[l][c].trouNoir == false){
+        grille[l][c].trouNoir = true;
+        System.out.println("Trou Noir placé");
+        return true;
+    }
+    System.out.println("Trou Noir déjà présent");
+    return false;
+}
+public void supprimerTrouNoir(int ligne, int colonne){
+        grille[ligne][colonne].supprimerTrouNoir();
+    } 
+public boolean presenceTrouNoir(int ligne, int colonne){
+        return grille[ligne][colonne].presenceTrouNoir();
+    }
+
+public boolean  placerDesintegrateur(int l, int c){
+    // si il y a déjà un desintegrateur de présent, renvoie false, true sinon
+ 
+    if (grille[l][c].désintegrateur == false){
+        grille[l][c].désintegrateur = true;
+        System.out.println("Désintégrateur placé");
+        return true;
+    }
+    System.out.println("Désintégrateur déjà présent");
+    return false;
+}
+public boolean presenceDesintegrateur(int ligne, int colonne){
+        return grille[ligne][colonne].presenceDesintegrateur();
+}
+
+public void supprimerDesintegrateur(int ligne, int colonne){
+        grille[ligne][colonne].supprimerDesintegrateur();
+    }
+
+public boolean supprimerJeton(int l, int c){
+    //Supprime le jeton si il y en a un dans la cellule
+ 
+    if (grille[l][c].jetonCourant == null){
+        System.out.println("Pas de Jeton");
+        return false;
+        }
+        else {
+        grille[l][c].jetonCourant = null;
+        System.out.println("Suppression Jeton effectuée");
+        return true;
+        }
+}
+public Jeton  recupererJeton(int l, int c){
+    //recupere le jeton de la coordonnée saisie
+    Jeton JetonRecup = grille[l][c].jetonCourant; 
+    grille[l][c].jetonCourant = null;
+    return JetonRecup;
+}
+   
 }
