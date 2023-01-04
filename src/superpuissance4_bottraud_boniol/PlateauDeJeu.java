@@ -10,9 +10,9 @@ package superpuissance4_bottraud_boniol;
  */
 public class PlateauDeJeu {
 
-    static Object[][] CellulesJeu;
+    //private CelluledeGrille CellulesJeu;
 
-    static void tasserColonne(int col2) {
+     void tasserColonne(int col2) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     CelluledeGrille[][] grille = new CelluledeGrille[6][7]; // création d'un tableau à deux dimensions avec 6 lignes et 7 colonnes rempli d'objet Cellule 
@@ -57,12 +57,15 @@ return false; // colonne remplie
         }
         }
 }
+       return false;
+    }
+    
 
     /**
      *
      */
 
-    
+ 
     public void afficherGrilleSurConsole() { // affiche la grille dans la console
 
     for (int l=5; l>=0; l--){ // boucle décrémentée car l'affichage conventionnel et celui pris par les tableaux est inversé
@@ -76,7 +79,7 @@ return false; // colonne remplie
             else if (grille[l][c].jetonCourant == null){
                 System.out.print("N");
             }
-            else if ((grille[l][c].jetonCourant.Couleur)!= "Rouge"){
+            else if ((grille[l][c].jetonCourant.Couleur).equals("Rouge")){
                     System.out.print("J");
                  }
             else{
@@ -90,7 +93,7 @@ return false; // colonne remplie
         System.out.print((c+1)); // affichage des colonnes (c+1) car tableau commence à 0
     }
     System.out.println(); // affichage global du tableau
-}
+}   
 
     /**
      *
@@ -375,7 +378,7 @@ return false; // colonne remplie
     return JetonRecup;
 }
 
-    public void viderGrille(joueur, joueur){ //initialise les données a 0 pour toutes les cellules, les trous noirs et les desintegrateurs 
+    public void viderGrille(){ //initialise les données a 0 pour toutes les cellules, les trous noirs et les desintegrateurs 
        for (int l=0; l<6; l++){ 
         for (int c=0;c<7; c++){  
             grille[l][c].jetonCourant = null;

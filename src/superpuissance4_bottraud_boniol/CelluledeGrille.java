@@ -13,6 +13,8 @@ public class CelluledeGrille {
     Jeton JetonGrille;
     boolean TrouNoir;
     boolean désintegrateur;
+    Jeton jetonCourant;
+    boolean trouNoir;
 
     /**
      * Affecte un jeton à une celulle
@@ -199,5 +201,17 @@ public class CelluledeGrille {
     @Override
     public String toString() {
         return "CelluledeGrille{" + "JetonGrille=" + JetonGrille + ", TrouNoir=" + TrouNoir + ", d\u00e9sintegrateur=" + désintegrateur + '}';
+    }
+
+    boolean presenceDesintegrateur() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    void supprimerDesintegrateur() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    boolean presenceTrouNoir() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

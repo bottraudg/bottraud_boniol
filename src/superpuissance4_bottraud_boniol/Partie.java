@@ -10,6 +10,12 @@ package superpuissance4_bottraud_boniol;
  */
 import java.util.Random;
 import java.util.Scanner;
+import superpuissance4_bottraud_boniol.Jeton;
+import superpuissance4_bottraud_boniol.Jeton;
+import superpuissance4_bottraud_boniol.PlateauDeJeu;
+import superpuissance4_bottraud_boniol.PlateauDeJeu;
+import superpuissance4_bottraud_boniol.joueur;
+import superpuissance4_bottraud_boniol.joueur;
 
 public final class Partie {
 
